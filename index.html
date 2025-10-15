@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fletcherism — Official Site • Teachings of Ryan Fletcher</title>
+  <meta name="description" content="Fletcherism — a cultural-philosophical compendium centered around Ryan Fletcher. Beliefs, rituals, history, archives, and community resources."/>
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23efc74a'/><text x='50' y='57' font-size='52' text-anchor='middle' fill='%23081222' font-family='Arial' font-weight='700'>F</text></svg>">
+  <style>
+    /* ========== VARIABLES & RESET ========== */
+    :root{
+      --bg:#071018; --panel:#071722; --muted:#9fb0c6; --text:#e9f3ff; --accent:#efc74a;
+      --glass: rgba(255,255,255,0.03); --card: #071926;
+      --maxw:1200px; --radius:12px; --shadow: 0 8px 30px rgba(2,6,23,0.6);
+      --focus: 3px rgba(239,199,74,0.18);
+      --font-sans: Inter, ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box;}
+    html,body{height:100%; margin:0; font-family:var(--font-sans); background: linear-gradient(180deg,#06101a 0%, #071221 100%); color:var(--text); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
+    a{color:var(--accent); text-decoration:none;}
+    img{max-width:100%; height:auto; display:block;}
+    /* ========== LAYOUT ========== */
+    .container{max-width:var(--maxw); margin:28px auto; padding:0 20px;}
+    header.site-header{position:sticky; top:14px; z-index:60; backdrop-filter: blur(6px); background:linear-gradient(180deg, rgba(7,17,30,0.65), rgba(7,17,30,0.45)); border-radius:14px; box-shadow:var(--shadow); border:1px solid rgba(255,255,255,0.02);}
+    .header-inner{display:flex; align-items:center; gap:18px; padding:12px 18px;}
+    .brand{display:flex; gap:14px; align-items:center;}
+    .logo{
+      width:64px; height:64px; border-radius:12px; display:flex; align-items:center; justify-content:center;
+      background: radial-gradient(circle at 30% 20%, rgba(239,199,74,0.35), transparent 20%), rgba(255,255,255,0.02);
+      color:#081122; font-weight:800; font-size:28px; box-shadow: inset 0 -6px 18px rgba(0,0,0,0.18);
+    }
+    .sitename{line-height:1; }
+    .sitename h1{margin:0; font-size:16px; letter-spacing:0.2px;}
+    .sitename p{margin:0; color:var(--muted); font-size:12px;}
+    nav.main-nav{margin-left:auto; display:flex; gap:10px; align-items:center;}
+    .nav-links{display:flex; gap:8px; align-items:center;}
+    .nav-links a{padding:10px 12px; border-radius:8px; color:var(--muted); font-size:14px;}
+    .nav-links a.active, .nav-links a:hover{color:var(--bg); background:linear-gradient(90deg, var(--accent), #ffd87e); font-weight:600;}
+    .controls{display:flex; gap:8px; align-items:center;}
+    button.icon-btn{background:transparent; border:1px solid rgba(255,255,255,0.03); padding:8px; border-radius:8px; color:var(--muted); cursor:pointer;}
+    button.icon-btn:focus{outline:none; box-shadow:var(--focus);}
+
+    /* Mobile menu */
+    .menu-toggle{display:none;}
+    .mobile-nav{display:none;}
+
+    /* ========== HERO ========== */
+    .hero{display:grid; grid-template-columns: 1fr 360px; gap:20px; margin-top:20px; align-items:start;}
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent); border-radius:12px; padding:22px; box-shadow:0 10px 30px rgba(4,8,16,0.6); border:1px solid rgba(255,255,255,0.02);}
+    .hero h2{margin:0 0 8px 0; font-size:28px; color:var(--accent);}
+    .hero p.lead{margin:0 0 12px 0; color:var(--muted); font-size:15px; line-height:1.6;}
+    .hero .actions{display:flex; gap:8px; margin-top:12px;}
+    .btn{display:inline-block; padding:10px 14px; background:var(--accent); color:#081122; border-radius:10px; font-weight:700; text-decoration:none;}
+    .btn.secondary{background:transparent; color:var(--text); border:1px solid rgba(255,255,255,0.04);}
+
+    /* ========== MAIN GRID ========== */
+    .grid{display:grid; grid-template-columns: 1fr 360px; gap:22px; margin-top:22px;}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent); padding:18px; border-radius:10px; border:1px solid rgba(255,255,255,0.02);}
+    .section-title{display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:10px;}
+    .section-title h3{margin:0; color:var(--accent); font-size:18px;}
+    .muted{color:var(--muted); font-size:14px;}
+
+    /* article content */
+    article.longform p{color:#dbeafc; margin:0 0 12px 0; line-height:1.6;}
+    article.longform h4{color:var(--accent); margin:12px 0 8px 0;}
+    .belief-block{background:rgba(255,255,255,0.02); padding:12px; border-radius:8px; margin-bottom:12px; border:1px solid rgba(255,255,255,0.01);}
+    .two-col{display:grid; grid-template-columns: 1fr 1fr; gap:12px;}
+    .timeline{list-style:none; padding:0; margin:0;}
+    .timeline li{padding:12px 0; border-bottom:1px dashed rgba(255,255,255,0.02);}
+    .timeline time{display:block; color:var(--muted); font-size:13px; margin-bottom:6px;}
+    .media-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:10px;}
+
+    /* contact form */
+    form.contact{display:grid; gap:10px;}
+    label{font-size:13px; color:var(--muted);}
+    input[type="text"], input[type="email"], textarea, select{
+      width:100%; padding:10px 12px; border-radius:8px; border:1px solid rgba(255,255,255,0.03); background:rgba(255,255,255,0.01); color:var(--text);
+    }
+    textarea{min-height:120px; resize:vertical;}
+    .small{font-size:13px; color:var(--muted);}
+
+    /* footer */
+    footer.site-footer{margin-top:26px; padding:18px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent); border:1px solid rgba(255,255,255,0.02); display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;}
+    .foot-links{display:flex; gap:12px; align-items:center; flex-wrap:wrap;}
+
+    /* responsive */
+    @media (max-width:1060px){ .hero{grid-template-columns:1fr;} .grid{grid-template-columns:1fr;} .hero-card{padding:18px;} }
+    @media (max-width:760px){
+      .header-inner{padding:10px;} .logo{width:54px;height:54px;font-size:24px;}
+      .nav-links{display:none;} .menu-toggle{display:inline-flex;}
+      .mobile-nav{display:block; position:fixed; inset:64px 14px auto 14px; background:linear-gradient(180deg, rgba(6,10,15,0.98), rgba(6,10,15,0.96)); border-radius:10px; padding:12px; border:1px solid rgba(255,255,255,0.03);}
+      .mobile-nav a{display:block; padding:10px; border-radius:8px; color:var(--muted); margin-bottom:6px;}
+      .mobile-nav a.active, .mobile-nav a:hover{background:linear-gradient(90deg,var(--accent), #ffd87e); color:var(--bg); font-weight:600;}
+    }
+
+    /* light mode (prefers light toggle) */
+    :root.light {
+      --bg:#f6f7f9; --panel:#ffffff; --muted:#556777; --text:#081122; --card:#f8fafb; --glass: rgba(2,6,23,0.03);
+      background: linear-gradient(180deg,#ffffff 0%, #f6f8fb 100%);
+    }
+    :root.light .logo{box-shadow:none;}
+  </style>
+</head>
+<body>
+  <div class="container" id="top">
+    <!-- HEADER -->
+    <header class="site-header" role="banner" aria-label="Fletcherism site header">
+      <div class="header-inner">
+        <div class="brand" title="Fletcherism — Official">
+          <div class="logo" aria-hidden="true">F</div>
+          <div class="sitename">
+            <h1>Fletcherism</h1>
+            <p>Teachings & Cultural Compendium — Ryan Fletcher</p>
+          </div>
+        </div>
+
+        <nav class="main-nav" role="navigation" aria-label="Main navigation">
+          <div class="nav-links" id="navLinks">
+            <a href="#home" class="nav-link active">Home</a>
+            <a href="#beliefs" class="nav-link">Beliefs</a>
+            <a href="#rituals" class="nav-link">Rituals</a>
+            <a href="#book" class="nav-link">The Book</a>
+            <a href="#history" class="nav-link">History</a>
+            <a href="#media" class="nav-link">Media</a>
+            <a href="#community" class="nav-link">Community</a>
+            <a href="#contact" class="nav-link">Contact</a>
+          </div>
+
+          <div class="controls">
+            <button class="icon-btn" id="toggleTheme" aria-label="Toggle theme">🌗</button>
+            <button class="icon-btn menu-toggle" id="openMenu" aria-label="Open menu" title="Open menu">☰</button>
+          </div>
+        </nav>
+
+        <!-- mobile nav (hidden on desktop) -->
+        <div id="mobileNav" class="mobile-nav" style="display:none;" aria-hidden="true"></div>
+      </div>
+    </header>
+
+    <!-- HERO / OVERVIEW -->
+    <section id="home" class="hero">
+      <div class="hero-card" role="region" aria-labelledby="heroTitle">
+        <h2 id="heroTitle">Fletcherism — An Official Compendium</h2>
+        <p class="lead">Fletcherism is a cultural, philosophical, and archival project centered around <strong>Ryan Fletcher</strong>. Here you'll find long-form essays, symbolic beliefs, community practices, historical context, and sanitized archival references designed for study, reflection, and creative practice.</p>
+
+        <p class="lead muted">This website presents a sanitized, non-violent version of the material. Archival reference to the original manuscript is available (sanitized). :contentReference[oaicite:1]{index=1}</p>
+
+        <div class="actions">
+          <a class="btn" href="#beliefs">Explore Beliefs</a>
+          <a class="btn secondary" href="#book">Read the Book</a>
+        </div>
+
+        <div style="margin-top:18px;" class="small muted">Quick links: <a href="#history">Timeline</a> • <a href="#media">Media & Archive</a> • <a href="#contact">Contact</a></div>
+      </div>
+
+      <aside class="hero-card" aria-label="Founder & Quick facts">
+        <h4 style="color:var(--accent); margin:0 0 8px 0;">Centered Around</h4>
+        <p style="margin:0 0 12px 0;"><strong>Ryan Fletcher</strong> — presented here as the movement's primary cultural figure: essayist, storyteller, and imaginative organizer. This site frames Fletcher as a literary and spiritual cultural founder rather than a literal authority.</p>
+
+        <div style="margin-top:8px;">
+          <div class="muted">Founding date</div>
+          <strong>— As a cultural project in collected manuscripts (archival works)</strong>
+        </div>
+
+        <div style="margin-top:12px;">
+          <div class="muted">Ethos</div>
+          <div class="small">Curiosity, symbolic inquiry, ecological respect, and joyful category-play.</div>
+        </div>
+
+        <div style="margin-top:14px;">
+          <a class="btn" href="#contact">Join the Community</a>
+        </div>
+      </aside>
+    </section>
+
+    <!-- MAIN GRID -->
+    <main class="grid" role="main">
+      <article class="card longform" aria-labelledby="beliefsTitle">
+        <!-- BELIEFS -->
+        <section id="beliefs" class="section" style="padding-bottom:8px;">
+          <div class="section-title">
+            <h3 id="beliefsTitle">Beliefs — Multiple Tones</h3>
+            <div class="muted">Spiritual • Philosophical • Playful</div>
+          </div>
+
+          <!-- LONG PHILOSOPHICAL ESSAY -->
+          <h4>The Philosophical Core</h4>
+          <p>Fletcherism treats cosmological and cultural claims as symbolic tools for reorienting attention. At the center is a practice of radical curiosity: a ritualized readiness to question common-sense narratives and to treat metaphors as instruments for ethical reflection. In the spiritual mode, Fletcherism fosters quiet practices of observation and small rituals of gratitude — a way to translate momentary wonder into communal vocabulary.</p>
+          <p>In the philosophical mode, Fletcherism explores epistemology: how we know what we know, and how stories — mythic or mundane — shape collective behavior. Followers are encouraged to map the genealogy of claims, weighing anecdote against empirical evidence and celebrating the rhetorical craft of alternative perspectives.</p>
+          <p>In the cultural/playful mode, Fletcherism delights in category-play. Claims such as "the hot dog is a taco" or "the moon as a projected symbol" are best read as provocations — conceptual puzzles that dislodge predictable thought patterns and open space for creative reclassification of everyday life.</p>
+
+          <h4>Core Tenets (Sanitized)</h4>
+          <div class="belief-block">
+            <h5><strong>1 — Curiosity as Practice</strong></h5>
+            <p>Curiosity is the basic ritual. Followers turn attention deliberately to the small, surprising details of experience: a pattern in tree bark, a phrase in a public sign, the cadences of local speech. Curiosity is practiced communally (reading circles) and privately (journaling).</p>
+          </div>
+
+          <div class="belief-block">
+            <h5><strong>2 — Stories as Instruments</strong></h5>
+            <p>Stories shape decisions. Fletcherism treats narratives (myth, news, rumor) as instruments to be analyzed and repurposed, not as immutable truth claims. The movement teaches media literacy, myth analysis, and creative rewriting as civic skills.</p>
+          </div>
+
+          <div class="belief-block">
+            <h5><strong>3 — Ecology of Relations</strong></h5>
+            <p>Inspired by natural networks (mycorrhizal webs), Fletcherism affirms relational ethics: cooperative, reciprocal, and interdependent action. Environmental stewardship and small acts of mutual aid are elevated as practical outcomes of the philosophy.</p>
+          </div>
+
+          <div class="belief-block">
+            <h5><strong>4 — Playful Reclassification</strong></h5>
+            <p>The movement encourages playful thought experiments. Reclassifying objects (food categories, habitual labels) is used as an exercise in intellectual flexibility and creative empathy.</p>
+          </div>
+
+          <h4>Long-form reflections</h4>
+          <p>Fletcherist essays often pivot between literary metaphor and empirical curiosity. Long chapters trace how cultural spectacle can divert attention from communal needs; shorter pieces rehearse meditative attention practices. The collection below is organized thematically to support both modes of engagement: contemplative practice and archival inquiry.</p>
+
+          <div style="margin-top:10px;">
+            <strong>Selected Themes</strong>
+            <ul class="small muted">
+              <li>Perception & Ritual</li>
+              <li>Media, Spectacle, and Attention</li>
+              <li>Ecological Interdependence</li>
+              <li>Culinary Metaphors & Category Theory (playful)</li>
+            </ul>
+          </div>
+
+        </section>
+
+        <!-- RITUALS -->
+        <section id="rituals" class="section" style="margin-top:14px; padding-bottom:8px;">
+          <div class="section-title">
+            <h3>Rituals & Practical Practices</h3>
+            <div class="muted">Daily • Weekly • Community</div>
+          </div>
+
+          <h4>Daily Rituals</h4>
+          <p>Short practices designed to center attention and cultivate gratitude.</p>
+          <div class="two-col" style="margin-top:8px;">
+            <div class="belief-block">
+              <h5>Morning Affirmation</h5>
+              <p>One simple phrase spoken aloud or written: <em>"I notice. I question. I attend."</em> The affirmation functions as a short cognitive reset before work or study.</p>
+            </div>
+            <div class="belief-block">
+              <h5>Evening Reflection</h5>
+              <p>Write one small observation of the day that surprised you — a record of unexpected attention to deepen curiosity across time.</p>
+            </div>
+          </div>
+
+          <h4>Weekly Gatherings</h4>
+          <p>Community circles where passages are read (sanitized selections), personal observations shared, and small cooperative projects planned (neighborhood clean-ups, skill swaps, seed libraries).</p>
+
+          <h4>Seasonal Ceremonies</h4>
+          <p>Quarterly events that pair creative production (music, essays, art) with collective stewardship actions (tree planting, community repair days). No coercion. No harm. Rituals are volunteer-led, adaptable, and inclusive.</p>
+
+        </section>
+
+        <!-- THE BOOK -->
+        <section id="book" class="section" style="margin-top:14px; padding-bottom:8px;">
+          <div class="section-title">
+            <h3>The Fletcherist Compendium (The Book)</h3>
+            <div class="muted">Sanitized edition • Essays & Archive</div>
+          </div>
+
+          <p>The book collects essays, polemical parables, symbolic cosmologies, and cultural play. This site presents a public, sanitized edition that removes or explicitly forbids any harmful content while preserving cultural analysis, mythic language, and performative rituals.</p>
+
+          <h4>Selected Excerpts</h4>
+          <div style="margin-top:8px;">
+            <div class="belief-block">
+              <strong>Prologue: The Call to Awaken</strong>
+              <p>"Wake with your hands in the cold of the world; learn the names for small things. Culture will offer spectacles — learn the names of the spectacles and the names of the small things they obscure." — Fletcherist Prologue (sanitized)</p>
+            </div>
+
+            <div class="belief-block">
+              <strong>Essay: The Moon as Mirror</strong>
+              <p>"The moon in Fletcherist prose is less a physics problem and more a mirror: a cultural surface for projecting stories that distract or delight. Our job is to notice the projection and ask: for whom does this light shine?"</p>
+            </div>
+
+          </div>
+
+          <div style="margin-top:12px; display:flex; gap:8px;">
+            <a class="btn" href="#media">Explore Archives</a>
+            <a class="btn secondary" href="#contact">Request Sanitized PDF</a>
+          </div>
+          <p class="small muted" style="margin-top:10px;">Archival reference: original manuscript (sanitized for public use). :contentReference[oaicite:2]{index=2}</p>
+        </section>
+
+        <!-- HISTORY / TIMELINE -->
+        <section id="history" class="section" style="margin-top:14px; padding-bottom:8px;">
+          <div class="section-title">
+            <h3>History & Timeline</h3>
+            <div class="muted">Documentary tone</div>
+          </div>
+
+          <p>The following timeline is a curated, documentary-style account of the movement's public milestones and important archival moments. Dates are presented in absolute form when available.</p>
+
+          <ul class="timeline" style="margin-top:10px;">
+            <li><time>Foundational Manuscripts (archival)</time><strong> — Collected essays and drafts compiled into the Fletcherist compendium. (Sanitized public edition available.)</strong></li>
+            <li><time>Community Publication</time><strong> — Essays circulated in small reading circles and zines; public forums for discussion initiated.</strong></li>
+            <li><time>Public Events</time><strong> — Seasonal gatherings, ecological stewardship projects, and educational events launched by volunteers.</strong></li>
+          </ul>
+
+          <p style="margin-top:12px;">For archival access or specific document requests, see <a href="#contact">Contact</a>.</p>
+
+        </section>
+
+        <!-- MEDIA & ARCHIVE -->
+        <section id="media" class="section" style="margin-top:14px; padding-bottom:8px;">
+          <div class="section-title">
+            <h3>Media & Archive</h3>
+            <div class="muted">Sanitized images, audio, and collected essays</div>
+          </div>
+
+          <p>Primary resources available here include sanitized scans of early drafts, audio readings of selected essays, and community artwork inspired by Fletcherist themes.</p>
+
+          <div class="media-grid" style="margin-top:10px;">
+            <div class="card">
+              <h4 style="margin:0 0 8px 0;">Archive (Sanitized PDF)</h4>
+              <p class="small muted">A public sanitized edition of the manuscript is archived for study. For direct archival access or restricted materials, contact the site editor.</p>
+              <p style="margin-top:8px;"><a class="btn" href="#contact">Request Archive Access</a></p>
+            </div>
+            <div class="card">
+              <h4 style="margin:0 0 8px 0;">Audio Readings</h4>
+              <p class="small muted">Curated audio readings of non-harmful selected essays — ideal for contemplative listening. Volunteer contributors provide narration.</p>
+            </div>
+            <div class="card">
+              <h4 style="margin:0 0 8px 0;">Community Art</h4>
+              <p class="small muted">Gallery of works inspired by Fletcherism: collage, poetry, and small craft projects from reading circles.</p>
+            </div>
+            <div class="card">
+              <h4 style="margin:0 0 8px 0;">Suggested External Pages</h4>
+              <p class="small muted">If this were a multi-site network, you might see links like:</p>
+              <ul class="small muted">
+                <li>/beliefs — full doctrine (sanitized)</li>
+                <li>/rituals — gatherings & practice guides</li>
+                <li>/archives — scanned materials & indexes</li>
+                <li>/community — local chapters & events</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- COMMUNITY -->
+        <section id="community" class="section" style="margin-top:14px; padding-bottom:8px;">
+          <div class="section-title">
+            <h3>Community & Conduct</h3>
+            <div class="muted">Ethics • Participation • Guidelines</div>
+          </div>
+
+          <p>Fletcherism encourages open participation — with explicit norms: no harm, no coercion, respect for diverse backgrounds, and a commitment to clarify when something is symbolic. Community chapters are autonomous and must sign a simple code of conduct that prioritizes safety, consent, and environmental stewardship.</p>
+
+          <h4>How to Join</h4>
+          <p>Attend a reading circle, subscribe to the public newsletter, or contact a local organizer via the contact form. The movement is volunteer-run; chapters request modest volunteer contributions (time, skill-exchange) and share resources openly.</p>
+
+        </section>
+
+      </article>
+
+      <!-- SIDEBAR -->
+      <aside class="card" aria-labelledby="sidebarTitle">
+        <h3 id="sidebarTitle" style="color:var(--accent); margin-top:0;">Quick Resources</h3>
+
+        <div style="margin-top:8px;">
+          <strong>Start Here</strong>
+          <ul style="padding-left:16px; margin-top:8px;" class="small muted">
+            <li><a href="#beliefs">Core Beliefs</a></li>
+            <li><a href="#rituals">Rituals & Practices</a></li>
+            <li><a href="#book">The Book (sanitized)</a></li>
+            <li><a href="#history">Timeline</a></li>
+          </ul>
+        </div>
+
+        <div style="margin-top:12px;">
+          <strong>Multiple Sites (simulation)</strong>
+          <p class="small muted">This single-page site simulates a multi-site network. Use these quick-links to jump to each "site" section above.</p>
+        </div>
+
+        <div style="margin-top:12px;">
+          <strong>Sanitized Archive</strong>
+          <p class="small muted">Original manuscript archived; sanitized public edition available on request. Reference: :contentReference[oaicite:3]{index=3}</p>
+          <p style="margin-top:8px;"><a class="btn" href="#contact">Request PDF</a></p>
+        </div>
+
+        <div style="margin-top:14px;">
+          <strong>Contact & Chapters</strong>
+          <p class="small muted">Find local reading circles or propose a new chapter via the contact form below.</p>
+          <p style="margin-top:8px;"><a class="btn secondary" href="#contact">Contact Us</a></p>
+        </div>
+      </aside>
+    </main>
+
+    <!-- CONTACT -->
+    <section id="contact" class="card" style="margin-top:18px;">
+      <div class="section-title">
+        <h3>Contact • Connect • Request</h3>
+        <div class="muted">Community liaison & archival requests</div>
+      </div>
+
+      <p class="muted">Use the contact form to request sanitized archival access, propose local events, or report community listings. This form performs client-side validation and then opens your email client (mailto) as a fallback so no server-side data is transmitted through this website.</p>
+
+      <form class="contact" id="contactForm" aria-label="Contact form">
+        <div>
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" placeholder="Your full name" required>
+        </div>
+
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="you@example.org" required>
+        </div>
+
+        <div>
+          <label for="purpose">Purpose</label>
+          <select id="purpose" name="purpose">
+            <option value="archive">Request sanitized archive</option>
+            <option value="chapter">Start a chapter</option>
+            <option value="event">Propose an event</option>
+            <option value="other">Other inquiry</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Describe your request in detail..." required></textarea>
+        </div>
+
+        <div style="display:flex; gap:8px; align-items:center;">
+          <button class="btn" type="submit" aria-label="Send message">Preview & Send</button>
+          <button class="btn secondary" id="clearBtn" type="button">Clear</button>
+        </div>
+
+        <p id="formNote" class="small muted" style="margin-top:8px;">By using this form you agree to the community code of conduct. No abusive, coercive or violent content will be supported.</p>
+      </form>
+
+      <div id="previewArea" style="display:none; margin-top:12px;" aria-live="polite"></div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer" role="contentinfo">
+      <div>
+        <strong>Fletcherism</strong> — Cultural Compendium centered around Ryan Fletcher. <span class="small muted">This public site is a sanitized edition; archival citation: :contentReference[oaicite:4]{index=4}</span>
+      </div>
+
+      <div class="foot-links">
+        <a href="#home">Home</a>
+        <a href="#beliefs">Beliefs</a>
+        <a href="#media">Archives</a>
+        <a href="#contact">Contact</a>
+        <a href="#" id="creditsBtn">Credits</a>
+      </div>
+    </footer>
+  </div>
+
+  <template id="mobileNavTemplate">
+    <nav role="navigation" aria-label="Mobile navigation">
+      <a href="#home" class="mnav">Home</a>
+      <a href="#beliefs" class="mnav">Beliefs</a>
+      <a href="#rituals" class="mnav">Rituals</a>
+      <a href="#book" class="mnav">The Book</a>
+      <a href="#history" class="mnav">History</a>
+      <a href="#media" class="mnav">Media</a>
+      <a href="#community" class="mnav">Community</a>
+      <a href="#contact" class="mnav">Contact</a>
+    </nav>
+  </template>
+
+  <script>
+    // ========== Helper: Smooth scroll & active link highlighting ==========
+    (function(){
+      const links = Array.from(document.querySelectorAll('a[href^="#"]'));
+      const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+      const mobile = document.getElementById('mobileNav');
+
+      // Smooth scroll
+      links.forEach(a=>{
+        a.addEventListener('click', (e)=>{
+          const href = a.getAttribute('href');
+          if(!href || href === '#') return;
+          const target = document.querySelector(href);
+          if(target){
+            e.preventDefault();
+            const y = target.getBoundingClientRect().top + window.scrollY - 72;
+            window.scrollTo({ top: y, behavior:'smooth' });
+            // close mobile if open
+            hideMobile();
+            // update active
+            updateActive(href);
+          }
+        });
+      });
+
+      // track sections to highlight nav
+      const sections = Array.from(document.querySelectorAll('main article section, section')).filter(s=>s.id);
+      function updateActive(hash){
+        navLinks.forEach(link=>{
+          link.classList.toggle('active', link.getAttribute('href')===hash);
+        });
+        // mobile links
+        Array.from(document.querySelectorAll('.mnav')).forEach(m=>{
+          m.classList.toggle('active', m.getAttribute('href')===hash);
+        });
+      }
+
+      window.addEventListener('scroll', throttle(()=>{
+        let current = '#home';
+        for(const sec of sections){
+          const rect = sec.getBoundingClientRect();
+          if(rect.top <= 120 && rect.bottom >= 120){
+            current = '#'+sec.id;
+            break;
+          }
+        }
+        updateActive(current);
+      }, 100));
+
+      // throttle helper
+      function throttle(fn, wait){
+        let t = 0;
+        return (...args)=>{
+          const now = Date.now();
+          if(now - t > wait){ t = now; fn(...args); }
+        };
+      }
+
+      // mobile nav handling
+      const openMenu = document.getElementById('openMenu');
+      const mobileTemplate = document.getElementById('mobileNavTemplate').content.cloneNode(true);
+      mobile.appendChild(mobileTemplate);
+
+      function showMobile(){
+        mobile.style.display = 'block';
+        mobile.setAttribute('aria-hidden','false');
+      }
+      function hideMobile(){
+        mobile.style.display = 'none';
+        mobile.setAttribute('aria-hidden','true');
+      }
+      openMenu.addEventListener('click', ()=>{
+        if(mobile.style.display === 'block') hideMobile(); else showMobile();
+      });
+      // hide on outside click
+      document.addEventListener('click', (e)=>{
+        if(!mobile.contains(e.target) && !openMenu.contains(e.target) && window.innerWidth <= 760){
+          hideMobile();
+        }
+      });
+
+      // mobile link close behavior
+      Array.from(document.querySelectorAll('.mnav')).forEach(m=>{
+        m.addEventListener('click', ()=> hideMobile());
+      });
+
+    })();
+
+    // ========== Theme toggle ==========
+    (function(){
+      const btn = document.getElementById('toggleTheme');
+      const root = document.documentElement;
+      // initial from localStorage
+      const stored = localStorage.getItem('fletcher_theme');
+      if(stored === 'light') root.classList.add('light');
+      btn.addEventListener('click', ()=>{
+        if(root.classList.contains('light')){
+          root.classList.remove('light');
+          localStorage.removeItem('fletcher_theme');
+        } else {
+          root.classList.add('light');
+          localStorage.setItem('fletcher_theme','light');
+        }
+      });
+    })();
+
+    // ========== Contact form behavior (client-only) ==========
+    (function(){
+      const form = document.getElementById('contactForm');
+      const preview = document.getElementById('previewArea');
+      const clearBtn = document.getElementById('clearBtn');
+
+      form.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        // validate basic
+        const name = form.name.value.trim();
+        const email = form.email.value.trim();
+        const purpose = form.purpose.value;
+        const message = form.message.value.trim();
+        if(!name || !email || !message){
+          alert('Please complete the form (name, email, and message are required).');
+          return;
+        }
+        // build preview
+        preview.style.display='block';
+        preview.innerHTML = `
+          <div style="background:rgba(0,0,0,0.25); padding:12px; border-radius:8px;">
+            <strong>Preview — Email draft</strong>
+            <p class="small muted" style="margin-top:6px;">To send, click <em>Send via email client</em> (opens your mail app). This site does not transmit messages to servers.</p>
+            <p style="margin-top:8px;"><strong>To:</strong> <em>archive@fletcherism.example (placeholder)</em></p>
+            <p style="margin:0.4rem 0;"><strong>Subject:</strong> Fletcherism request — ${escapeHtml(purpose)} — from ${escapeHtml(name)}</p>
+            <hr style="border:none; border-top:1px solid rgba(255,255,255,0.04); margin:8px 0;">
+            <pre style="white-space:pre-wrap; font-family:inherit; color:var(--text);">${escapeHtml(message)}</pre>
+            <div style="margin-top:8px; display:flex; gap:8px;">
+              <button id="sendMail" class="btn">Send via email client</button>
+              <button id="editMail" class="btn secondary">Edit</button>
+            </div>
+          </div>
+        `;
+
+        // wire buttons
+        document.getElementById('sendMail').addEventListener('click', ()=>{
+          const subject = encodeURIComponent(`Fletcherism request — ${purpose} — from ${name}`);
+          const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPurpose: ${purpose}\n\nMessage:\n${message}`);
+          // opens mail client
+          window.location.href = `mailto:archive@fletcherism.example?subject=${subject}&body=${body}`;
+        });
+        document.getElementById('editMail').addEventListener('click', ()=> {
+          preview.style.display='none';
+        });
+      });
+
+      clearBtn.addEventListener('click', ()=>{
+        form.reset();
+        preview.style.display='none';
+      });
+
+      function escapeHtml(s){
+        return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+      }
+    })();
+
+    // ========== credits modal (simple) ==========
+    (function(){
+      const btn = document.getElementById('creditsBtn');
+      btn.addEventListener('click', (e)=>{
+        e.preventDefault();
+        alert('Credits: This site is a sanitized, fictional official page for Fletcherism centered on Ryan Fletcher. Archival citation: :contentReference[oaicite:5]{index=5}');
+      });
+    })();
+  </script>
+</body>
+</html>
