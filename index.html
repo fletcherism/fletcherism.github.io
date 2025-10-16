@@ -594,7 +594,7 @@
           <div style="background:rgba(0,0,0,0.25); padding:12px; border-radius:8px;">
             <strong>Preview — Email draft</strong>
             <p class="small muted" style="margin-top:6px;">To send, click <em>Send via email client</em> (opens your mail app). This site does not transmit messages to servers.</p>
-            <p style="margin-top:8px;"><strong>To:</strong> <em>business.ventures6767@gmail.com (placeholder)</em></p>
+            <p style="margin-top:8px;"><strong>To:</strong> <em>fletcherism-services@outlook.com (placeholder)</em></p>
             <p style="margin:0.4rem 0;"><strong>Subject:</strong> Fletcherism request — ${escapeHtml(purpose)} — from ${escapeHtml(name)}</p>
             <hr style="border:none; border-top:1px solid rgba(255,255,255,0.04); margin:8px 0;">
             <pre style="white-space:pre-wrap; font-family:inherit; color:var(--text);">${escapeHtml(message)}</pre>
@@ -610,7 +610,7 @@
           const subject = encodeURIComponent(`Fletcherism request — ${purpose} — from ${name}`);
           const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPurpose: ${purpose}\n\nMessage:\n${message}`);
           // opens mail client
-          window.location.href = `mailto:business.ventures6767@gmail.com?subject=${subject}&body=${body}`;
+          window.location.href = `mailto:fletcherism-services@outlook.com?subject=${subject}&body=${body}`;
         });
         document.getElementById('editMail').addEventListener('click', ()=> {
           preview.style.display='none';
